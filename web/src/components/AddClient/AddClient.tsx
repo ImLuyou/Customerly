@@ -57,7 +57,6 @@ const AddClient = ({ addedCallback }) => {
   const onSubmit = async event => {
     event.preventDefault();
     const data = new FormData(event.target);
-    console.log(event, data.get('fullname'));
 
     const newClient = {
       fullname: data.get('fullname'),
@@ -69,14 +68,10 @@ const AddClient = ({ addedCallback }) => {
 
     const response = await create({ variables: { input: newClient } });
 
-    console.log(response);
-
     if (response?.data?.createMyClient?.id) {
       event.target.reset();
       addedCallback(response.data.createMyClient);
       toast('Client added');
-
-      navigate(`/dashboard/client/${response.data.createMyClient.id}`);
 
       try {
         const sales = newSalesList.map(item => {
@@ -89,12 +84,12 @@ const AddClient = ({ addedCallback }) => {
           return createSale({ variables: { input: item } });
         });
 
-        const salesSaved = await Promise.all(recordsSales);
-
-        console.log('sales: ', sales, salesSaved);
+        await Promise.all(recordsSales);
       } catch (e) {
         console.log(e);
       }
+
+      navigate(`/dashboard/client/${response.data.createMyClient.id}`);
     } else {
       toast.error('Something went wrong');
     }
