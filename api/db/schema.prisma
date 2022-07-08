@@ -1,0 +1,46 @@
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+// Define your own datamodels here and run `yarn redwood prisma migrate dev`
+// to create migrations for them and apply to your dev DB.
+// TODO: Please remove the following example:
+
+model User {
+  id                  Int @id @default(autoincrement())
+  email               String  @unique
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+}
+
+model MyClient {
+  id String @id @default(cuid())
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  owner String
+
+  fullname String
+  email String?
+  phone String?
+  notes String?
+  sales Sale[]
+}
+
+model Sale {
+  id String @id @default(cuid())
+  name String
+  owner String
+  clientOwnerId String
+  myClient MyClient @relation(fields: [clientOwnerId], references: [id])
+  status String @default("new")
+  createdAt DateTime @default(now())
+
+}

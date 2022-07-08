@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "api",
+      "web",
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@redwoodjs/core": "2.0.0"
+  },
+  "eslintConfig": {
+    "extends": "@redwoodjs/eslint-config",
+    "root": true
+  },
+  "engines": {
+    "node": ">=14.19 <=16.x",
+    "yarn": ">=1.15"
+  },
+  "prisma": {
+    "seed": "yarn rw exec seed"
+  },
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.7",
+    "@mui/x-data-grid": "^5.12.3",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "history": "^5.3.0",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.33.1"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
+  }
+}
