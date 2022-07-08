@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
@@ -50,6 +50,7 @@ export const Failure = ({
 
 export const Success = ({
   myClientsByOwner,
+  refetch,
 }: CellSuccessProps<
   FindMyClientsByOwnerQuery,
   FindMyClientsByOwnerQueryVariables
@@ -76,6 +77,15 @@ export const Success = ({
   function handleNewClient(client) {
     setClients([...clients, client]);
   }
+
+  useEffect(() => {
+    setInterval(() => {
+      refetch().then(() => {
+        setClients(myClientsByOwner);
+      });
+    }, 5000);
+  }, []);
+
   return (
     <>
       <Grid
@@ -87,7 +97,12 @@ export const Success = ({
         pt={1}
       >
         <Grid item xs={12} pb={1} pl={1} pt={1}>
-          <AddClient addedCallback={e => handleNewClient(e)} />
+          <AddClient
+            addedCallback={e => {
+              handleNewClient(e);
+              refetch();
+            }}
+          />
         </Grid>
         <Grid container pl={2} pr={2}>
           <Box sx={{ minHeight: '511px', height: '100%', minWidth: '100%' }}>
