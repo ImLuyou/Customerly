@@ -8,9 +8,15 @@ Start by installing dependencies:
 ```
 yarn install
 ```
+
+Now, we need to generate the Prisma migration
+```
+yarn rw prisma migrate dev
+```
+
 Run project with:
 ```
-yarn redwood dev
+yarn rw dev
 ```
 
 Your browser should automatically open to http://localhost:8910 where you'll see the Login Page.
