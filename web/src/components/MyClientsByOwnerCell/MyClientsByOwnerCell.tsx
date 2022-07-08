@@ -19,6 +19,7 @@ export const QUERY = gql`
       id
       fullname
       status
+      createdAt
     }
   }
 `;
@@ -29,7 +30,17 @@ export const beforeQuery = props => {
 
 export const Loading = () => <div>Loading...</div>;
 
-export const Empty = () => <div>Empty</div>;
+export const Empty = () => {
+  return (
+    <Grid item xs={12} pb={1} pl={1} pt={1}>
+      <AddClient
+        addedCallback={e => {
+          console.log(e);
+        }}
+      />
+    </Grid>
+  );
+};
 
 export const Failure = ({
   error,
@@ -53,6 +64,12 @@ export const Success = ({
       headerName: 'Status',
       flex: 1,
       renderCell: ({ value }) => _.capitalize(value.replace('-', ' ')),
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Registered at',
+      flex: 1,
+      renderCell: ({ value }) => new Date(value).toLocaleString(),
     },
   ];
 

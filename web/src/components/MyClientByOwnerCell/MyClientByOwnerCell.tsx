@@ -31,6 +31,7 @@ export const QUERY = gql`
       id
       fullname
       status
+      createdAt
       email
       phone
       sales {
@@ -82,6 +83,10 @@ export const Success = ({
           <Grid container>
             <Card sx={{ padding: '1rem', width: '100%' }}>
               <Grid item xs={12} md={6}>
+                <Typography variant='caption' color='gray'>
+                  Registered at{' '}
+                  {new Date(displayClient?.createdAt).toLocaleString()}
+                </Typography>
                 <Typography variant='h4'>{displayClient.fullname}</Typography>
                 <Typography variant='subtitle1'>
                   {_.capitalize(displayClient.status.replace('-', ' '))}
