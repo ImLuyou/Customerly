@@ -84,7 +84,6 @@ export const Success = ({
               rowHeight={50}
               onCellClick={value => {
                 if (value.field !== 'actions') {
-                  console.log(routes.myClient({ id: value.row.id }));
                   navigate(routes.myClient({ id: value.row.id }));
                 }
               }}
