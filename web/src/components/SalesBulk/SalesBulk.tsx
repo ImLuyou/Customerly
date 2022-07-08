@@ -48,7 +48,7 @@ const SAVE_ALONE_SALE = gql`
   }
 `;
 
-const SalesBulk = ({ sales, saveData = null }) => {
+const SalesBulk = ({ sales, onSalesUpdate = data => {}, saveData = null }) => {
   const [newSales, setNewSales] = useState(sales);
   const [saleName, setSaleName] = useState('');
   const [status, setStatus] = useState('new');
@@ -71,13 +71,14 @@ const SalesBulk = ({ sales, saveData = null }) => {
       status: status,
     };
 
-    if (saveData !== undefined) {
+    if (saveData !== null) {
       await saveAloneSale(newSale);
     }
 
     if (saleName != '') {
       setSaleName('');
       setNewSales([...newSales, newSale]);
+      onSalesUpdate(newSale);
     }
   };
 
@@ -152,7 +153,7 @@ const SalesBulk = ({ sales, saveData = null }) => {
                 </Select>
               </FormControl>
             </Box>
-            <Button onClick={() => handleNew()}>Add record</Button>
+            <Button onClick={() => handleNew()}>Register Oportuinity</Button>
           </Card>
         </Grid>
         <Grid item xs={12}>
@@ -200,8 +201,7 @@ const SalesBulk = ({ sales, saveData = null }) => {
                         <DialogTitle>{'Delete sale'}</DialogTitle>
                         <DialogContent>
                           <DialogContentText id='alert-dialog-slide-description'>
-                            Are you sure that you want to delete this record
-                            sale?
+                            Are you sure that you want to delete this record?
                           </DialogContentText>
                         </DialogContent>
                         <DialogActions>

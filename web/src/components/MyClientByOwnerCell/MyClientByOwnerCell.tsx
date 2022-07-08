@@ -126,7 +126,7 @@ export const Success = ({
           <Divider />
           <Grid item xs={12}>
             <Typography variant='h5' p={2}>
-              Sale records
+              Oportuinity records
             </Typography>
             <SalesBulk
               sales={displayClient.sales}

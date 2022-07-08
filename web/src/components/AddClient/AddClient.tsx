@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 
 import { useAuth } from '@redwoodjs/auth';
+import { navigate } from '@redwoodjs/router';
 import { useMutation } from '@redwoodjs/web';
 import { toast, Toaster } from '@redwoodjs/web/dist/toast';
 
@@ -74,6 +75,8 @@ const AddClient = ({ addedCallback }) => {
       event.target.reset();
       addedCallback(response.data.createMyClient);
       toast('Client added');
+
+      navigate(`/dashboard/client/${response.data.createMyClient.id}`);
 
       try {
         const sales = newSalesList.map(item => {
@@ -154,7 +157,7 @@ const AddClient = ({ addedCallback }) => {
               </FormControl>
 
               <Divider />
-              <Typography variant='subtitle1'>Sales</Typography>
+              <Typography variant='subtitle1'>Oportunities</Typography>
               <SalesBulk
                 sales={newSalesList}
                 onSalesUpdate={e => setNewSalesList([...newSalesList, e])}
