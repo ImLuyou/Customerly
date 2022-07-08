@@ -1,7 +1,7 @@
 # README
 
 Welcome to Customerly!
-This is a CRM code challenge made with Redwoodjw
+This is a CRM code challenge made with Redwoodjs
 
 Start by installing dependencies:
 
